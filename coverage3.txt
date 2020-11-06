@@ -1,0 +1,25 @@
+mode: atomic
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:20.23,22.2 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:25.33,27.2 1 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:29.33,31.2 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:34.69,36.16 2 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:43.2,43.37 1 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:47.2,47.37 1 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:54.2,55.16 2 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:61.2,63.16 3 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:69.2,69.19 1 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:36.16,37.12 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:40.3,40.67 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:37.12,38.51 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:43.37,45.3 1 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:47.37,52.3 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:55.16,56.12 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:59.3,59.67 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:56.12,57.51 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:63.16,64.12 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:67.3,67.61 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:64.12,65.45 1 0
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:76.62,79.19 2 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:85.2,85.38 1 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:79.19,81.3 1 1
+github.com/mchirico/go-gov/pkg/httputils/httputils.go:81.8,83.3 1 0
