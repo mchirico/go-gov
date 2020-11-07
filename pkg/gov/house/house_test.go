@@ -8,17 +8,15 @@ import (
 )
 
 func TestHouse(t *testing.T) {
-	url := "https://api.propublica.org/congress/v1/116/house/members.json"
+	url := "https://api.propublica.org/congress/v1/116/senate/members.json"
 
 	key := "X-API-Key"
 	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
 
-	httputils.Header(key, value)
+	h := httputils.NewHTTP()
+	h.Header(key, value)
 
-	r, err := httputils.Get(url)
-	if err != nil {
-		t.Fatalf("err: %s\n", err)
-	}
+	r, err := h.Get(url)
 
 	var gov House
 	err = json.Unmarshal(r, &gov)

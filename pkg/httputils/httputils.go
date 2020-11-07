@@ -4,15 +4,10 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"sync"
 )
 
 var debug = false
-
-// Headers contains all HTTP headers to send
-var Headers = make(map[string]string)
-
-// Cookies contains all HTTP cookies to send
-var Cookies = make(map[string]string)
 
 // SetDebug sets the debug status
 // Setting this to true causes the panics to be thrown and logged onto the console.
@@ -22,16 +17,21 @@ func SetDebug(d bool) {
 }
 
 // Header sets a new HTTP header
-func Header(n string, v string) {
-	Headers[n] = v
+func (h *HTTP) Header(n string, v string) {
+	h.Mutex.Lock()
+	defer h.Mutex.Unlock()
+	h.Headers[n] = v
 }
 
-func Cookie(n string, v string) {
-	Cookies[n] = v
+func (h *HTTP) Cookie(n string, v string) {
+	h.Mutex.Lock()
+	defer h.Mutex.Unlock()
+	h.Cookies[n] = v
 }
 
-// GetWithClient returns the HTML returned by the url using a provided HTTP client
-func GetWithClient(url string, client *http.Client) ([]byte, error) {
+func (h *HTTP) Get(url string) ([]byte, error) {
+	h.Mutex.Lock()
+	h.Mutex.Unlock()
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		if debug {
@@ -40,18 +40,18 @@ func GetWithClient(url string, client *http.Client) ([]byte, error) {
 		return nil, errors.New("couldn't perform GET request to " + url)
 	}
 	// Set headers
-	for hName, hValue := range Headers {
+	for hName, hValue := range h.Headers {
 		req.Header.Set(hName, hValue)
 	}
 	// Set cookies
-	for cName, cValue := range Cookies {
+	for cName, cValue := range h.Cookies {
 		req.AddCookie(&http.Cookie{
 			Name:  cName,
 			Value: cValue,
 		})
 	}
 	// Perform request
-	resp, err := client.Do(req)
+	resp, err := h.client.Do(req)
 	if err != nil {
 		if debug {
 			panic("Couldn't perform GET request to " + url)
@@ -70,17 +70,16 @@ func GetWithClient(url string, client *http.Client) ([]byte, error) {
 }
 
 type HTTP struct {
-	client *http.Client
+	client  *http.Client
+	Headers map[string]string
+	Cookies map[string]string
+	sync.Mutex
 }
 
-func Get(url string, client ...*http.Client) ([]byte, error) {
-
-	var newclient *http.Client
-	if client == nil {
-		newclient = &http.Client{}
-	} else {
-		newclient = client[0]
-	}
-
-	return GetWithClient(url, newclient)
+func NewHTTP() *HTTP {
+	h := &HTTP{}
+	h.client = &http.Client{}
+	h.Headers = map[string]string{}
+	h.Cookies = map[string]string{}
+	return h
 }

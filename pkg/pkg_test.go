@@ -14,12 +14,10 @@ func TestSenate(t *testing.T) {
 	key := "X-API-Key"
 	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
 
-	httputils.Header(key, value)
+	h := httputils.NewHTTP()
+	h.Header(key, value)
 
-	r, err := httputils.Get(url)
-	if err != nil {
-		t.Fatalf("err: %s\n", err)
-	}
+	r, err := h.Get(url)
 
 	var gov senate.Senate
 	err = json.Unmarshal(r, &gov)
