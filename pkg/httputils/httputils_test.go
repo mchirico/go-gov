@@ -1,8 +1,8 @@
 package httputils
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestGet(t *testing.T) {
@@ -10,8 +10,7 @@ func TestGet(t *testing.T) {
 
 	key := "X-API-Key"
 	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
-	Header(key,value)
-
+	Header(key, value)
 
 	r, err := Get(url)
 	if err != nil {
@@ -19,7 +18,5 @@ func TestGet(t *testing.T) {
 	}
 
 	fmt.Println(string(r))
-
-
 
 }

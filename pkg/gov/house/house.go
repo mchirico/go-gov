@@ -1,6 +1,6 @@
-package gov
+package house
 
-type Gov struct {
+type House struct {
 	Status    string `json:"status"`
 	Copyright string `json:"copyright"`
 	Results   []struct {
@@ -20,10 +20,10 @@ type Gov struct {
 			DateOfBirth          string      `json:"date_of_birth"`
 			Gender               string      `json:"gender"`
 			Party                string      `json:"party"`
-			LeadershipRole       interface{} `json:"leadership_role"`
+			LeadershipRole       string      `json:"leadership_role"`
 			TwitterAccount       string      `json:"twitter_account"`
 			FacebookAccount      string      `json:"facebook_account"`
-			YoutubeAccount       string      `json:"youtube_account"`
+			YoutubeAccount       interface{} `json:"youtube_account"`
 			GovtrackID           string      `json:"govtrack_id"`
 			CspanID              string      `json:"cspan_id"`
 			VotesmartID          string      `json:"votesmart_id"`
@@ -33,9 +33,9 @@ type Gov struct {
 			FecCandidateID       string      `json:"fec_candidate_id"`
 			URL                  string      `json:"url"`
 			RssURL               string      `json:"rss_url"`
-			ContactForm          string      `json:"contact_form"`
+			ContactForm          interface{} `json:"contact_form"`
 			InOffice             bool        `json:"in_office"`
-			CookPvi              interface{} `json:"cook_pvi"`
+			CookPvi              string      `json:"cook_pvi"`
 			DwNominate           float64     `json:"dw_nominate"`
 			IdealPoint           interface{} `json:"ideal_point"`
 			Seniority            string      `json:"seniority"`
@@ -47,14 +47,14 @@ type Gov struct {
 			OcdID                string      `json:"ocd_id"`
 			Office               string      `json:"office"`
 			Phone                string      `json:"phone"`
-			Fax                  string      `json:"fax"`
+			Fax                  interface{} `json:"fax"`
 			State                string      `json:"state"`
-			SenateClass          string      `json:"senate_class"`
-			StateRank            string      `json:"state_rank"`
-			LisID                string      `json:"lis_id"`
-			MissedVotesPct       float64     `json:"missed_votes_pct"`
-			VotesWithPartyPct    float64     `json:"votes_with_party_pct"`
-			VotesAgainstPartyPct float64     `json:"votes_against_party_pct"`
+			District             string      `json:"district"`
+			AtLarge              bool        `json:"at_large"`
+			Geoid                string      `json:"geoid"`
+			MissedVotesPct       float64     `json:"missed_votes_pct,omitempty"`
+			VotesWithPartyPct    float64     `json:"votes_with_party_pct,omitempty"`
+			VotesAgainstPartyPct float64     `json:"votes_against_party_pct,omitempty"`
 		} `json:"members"`
 	} `json:"results"`
 }

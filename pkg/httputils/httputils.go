@@ -84,4 +84,3 @@ func Get(url string, client ...*http.Client) ([]byte, error) {
 
 	return GetWithClient(url, newclient)
 }
-

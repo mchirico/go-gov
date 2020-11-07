@@ -1,15 +1,14 @@
-package pkg
+package house
 
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/mchirico/go-gov/pkg/gov/senate"
 	"github.com/mchirico/go-gov/pkg/httputils"
 	"testing"
 )
 
-func TestSenate(t *testing.T) {
-	url := "https://api.propublica.org/congress/v1/116/senate/members.json"
+func TestHouse(t *testing.T) {
+	url := "https://api.propublica.org/congress/v1/116/house/members.json"
 
 	key := "X-API-Key"
 	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
@@ -21,7 +20,7 @@ func TestSenate(t *testing.T) {
 		t.Fatalf("err: %s\n", err)
 	}
 
-	var gov senate.Senate
+	var gov House
 	err = json.Unmarshal(r, &gov)
 	if err != nil {
 		fmt.Println("error:", err)
@@ -33,7 +32,7 @@ func TestSenate(t *testing.T) {
 	}
 
 	for k, v := range m {
-		if v < 2 {
+		if v < 1 {
 			t.Fatalf("Data bad: %v,%v\n", k, v)
 		}
 	}
