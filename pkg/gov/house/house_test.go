@@ -8,7 +8,7 @@ import (
 )
 
 func TestHouse(t *testing.T) {
-	url := "https://api.propublica.org/congress/v1/116/senate/members.json"
+	url := "https://api.propublica.org/congress/v1/116/house/members.json"
 
 	key := "X-API-Key"
 	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
@@ -36,5 +36,23 @@ func TestHouse(t *testing.T) {
 	}
 
 	fmt.Println(gov.Results[0].Members[0].FacebookAccount)
+
+}
+
+func TestGetHouse(t *testing.T) {
+	gov, err := GetHouse()
+	if err != nil {
+		t.Fatalf("We got error: %s\n", err)
+	}
+	fmt.Printf("%v\n", gov.Results[0].Members[0])
+}
+
+func TestSubcommittees(t *testing.T) {
+   url := "https://api.propublica.org/congress/v1/members/A000374.json"
+   sub, err := GetSubcommittees(url)
+   if err != nil {
+   	t.Fatalf("Didn't work: %s\n",err)
+   }
+   fmt.Printf("sub: %v\n",sub)
 
 }
