@@ -1,5 +1,11 @@
 package senate
 
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/mchirico/go-gov/pkg/httputils"
+)
+
 type Senate struct {
 	Status    string `json:"status"`
 	Copyright string `json:"copyright"`
@@ -57,4 +63,25 @@ type Senate struct {
 			VotesAgainstPartyPct float64     `json:"votes_against_party_pct"`
 		} `json:"members"`
 	} `json:"results"`
+}
+
+
+func GetSenate() (Senate, error) {
+
+	url := "https://api.propublica.org/congress/v1/116/senate/members.json"
+
+	key := "X-API-Key"
+	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
+
+	h := httputils.NewHTTP()
+	h.Header(key, value)
+
+	r, err := h.Get(url)
+
+	var gov Senate
+	err = json.Unmarshal(r, &gov)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	return gov, err
 }
