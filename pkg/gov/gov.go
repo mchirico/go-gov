@@ -1,11 +1,12 @@
-package house
+package gov
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/mchirico/go-gov/pkg/httputils"
 )
 
-type House struct {
+type GOV struct {
 	Status    string `json:"status"`
 	Copyright string `json:"copyright"`
 	Results   []struct {
@@ -25,10 +26,10 @@ type House struct {
 			DateOfBirth          string      `json:"date_of_birth"`
 			Gender               string      `json:"gender"`
 			Party                string      `json:"party"`
-			LeadershipRole       string      `json:"leadership_role"`
+			LeadershipRole       interface{} `json:"leadership_role"`
 			TwitterAccount       string      `json:"twitter_account"`
 			FacebookAccount      string      `json:"facebook_account"`
-			YoutubeAccount       interface{} `json:"youtube_account"`
+			YoutubeAccount       string      `json:"youtube_account"`
 			GovtrackID           string      `json:"govtrack_id"`
 			CspanID              string      `json:"cspan_id"`
 			VotesmartID          string      `json:"votesmart_id"`
@@ -38,9 +39,9 @@ type House struct {
 			FecCandidateID       string      `json:"fec_candidate_id"`
 			URL                  string      `json:"url"`
 			RssURL               string      `json:"rss_url"`
-			ContactForm          interface{} `json:"contact_form"`
+			ContactForm          string      `json:"contact_form"`
 			InOffice             bool        `json:"in_office"`
-			CookPvi              string      `json:"cook_pvi"`
+			CookPvi              interface{} `json:"cook_pvi"`
 			DwNominate           float64     `json:"dw_nominate"`
 			IdealPoint           interface{} `json:"ideal_point"`
 			Seniority            string      `json:"seniority"`
@@ -52,14 +53,14 @@ type House struct {
 			OcdID                string      `json:"ocd_id"`
 			Office               string      `json:"office"`
 			Phone                string      `json:"phone"`
-			Fax                  interface{} `json:"fax"`
+			Fax                  string      `json:"fax"`
 			State                string      `json:"state"`
-			District             string      `json:"district"`
-			AtLarge              bool        `json:"at_large"`
-			Geoid                string      `json:"geoid"`
-			MissedVotesPct       float64     `json:"missed_votes_pct,omitempty"`
-			VotesWithPartyPct    float64     `json:"votes_with_party_pct,omitempty"`
-			VotesAgainstPartyPct float64     `json:"votes_against_party_pct,omitempty"`
+			SenateClass          string      `json:"senate_class"`
+			StateRank            string      `json:"state_rank"`
+			LisID                string      `json:"lis_id"`
+			MissedVotesPct       float64     `json:"missed_votes_pct"`
+			VotesWithPartyPct    float64     `json:"votes_with_party_pct"`
+			VotesAgainstPartyPct float64     `json:"votes_against_party_pct"`
 		} `json:"members"`
 	} `json:"results"`
 }
@@ -152,8 +153,7 @@ type Subcommittees struct {
 	} `json:"results"`
 }
 
-func GetHouse() (House, error) {
-	url := "https://api.propublica.org/congress/v1/116/house/members.json"
+func GetGov(url string) (GOV, error) {
 
 	key := "X-API-Key"
 	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
@@ -163,14 +163,12 @@ func GetHouse() (House, error) {
 
 	r, err := h.Get(url)
 
-	var gov House
+	var gov GOV
 	err = json.Unmarshal(r, &gov)
 	if err != nil {
-		return gov, err
+		fmt.Println("error:", err)
 	}
-
 	return gov, err
-
 }
 
 func GetSubcommittees(url string) (Subcommittees, error) {
