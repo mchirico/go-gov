@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/mchirico/go-gov/pkg/httputils"
+	"sync"
 )
 
 type GOV struct {
@@ -153,10 +154,24 @@ type Subcommittees struct {
 	} `json:"results"`
 }
 
-func GetGov(url string) (GOV, error) {
+type Gov struct {
+	Key map[string]string
+	sync.Mutex
+}
+
+func NewGov() *Gov {
+	gov := &Gov{}
+	gov.Key = map[string]string{}
+	gov.Key["X-API-Key"] = "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
+	return gov
+}
+
+func (g *Gov) GetGov(url string) (GOV, error) {
+	g.Mutex.Lock()
+	defer g.Mutex.Unlock()
 
 	key := "X-API-Key"
-	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
+	value := g.Key[key]
 
 	h := httputils.NewHTTP()
 	h.Header(key, value)
@@ -171,9 +186,13 @@ func GetGov(url string) (GOV, error) {
 	return gov, err
 }
 
-func GetSubcommittees(url string) (Subcommittees, error) {
+func (g *Gov) GetSubcommittees(url string) (Subcommittees, error) {
+
+	g.Mutex.Lock()
+	defer g.Mutex.Unlock()
+
 	key := "X-API-Key"
-	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
+	value := g.Key[key]
 
 	h := httputils.NewHTTP()
 	h.Header(key, value)

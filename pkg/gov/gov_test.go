@@ -5,24 +5,25 @@ import (
 	"testing"
 )
 
-func GetGOVs() (GOV, GOV, error) {
+func GetGOVs() (*Gov, GOV, GOV, error) {
+	g := NewGov()
 	senate := "https://api.propublica.org/congress/v1/116/senate/members.json"
-	s, err := GetGov(senate)
+	s, err := g.GetGov(senate)
 	if err != nil {
-		return s, s, err
+		return g, s, s, err
 	}
 
 	house := "https://api.propublica.org/congress/v1/116/house/members.json"
-	h, err := GetGov(house)
+	h, err := g.GetGov(house)
 	if err != nil {
-		return h, h, err
+		return g, h, h, err
 	}
-	return h, s, err
+	return g, h, s, err
 
 }
 
 func TestGetGov(t *testing.T) {
-	house, senate, err := GetGOVs()
+	_, house, senate, err := GetGOVs()
 	if err != nil {
 		t.Fatalf("err: %s\n", err)
 	}
@@ -34,15 +35,16 @@ func TestGetGov(t *testing.T) {
 }
 
 func TestGetSubcommittees(t *testing.T) {
-	house, senate, err := GetGOVs()
+
+	g, house, senate, err := GetGOVs()
 	if err != nil {
 		t.Fatalf("err: %s\n", err)
 	}
-	_, err = GetSubcommittees(house.Results[0].Members[0].APIURI)
+	_, err = g.GetSubcommittees(house.Results[0].Members[0].APIURI)
 	if err != nil {
 		t.Fatalf("err: %s\n", err)
 	}
-	_, err = GetSubcommittees(senate.Results[0].Members[0].APIURI)
+	_, err = g.GetSubcommittees(senate.Results[0].Members[0].APIURI)
 	if err != nil {
 		t.Fatalf("err: %s\n", err)
 	}
