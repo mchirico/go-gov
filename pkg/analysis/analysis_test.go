@@ -8,15 +8,13 @@ import (
 	"testing"
 )
 
-
-func TestGetHouseMembers(t *testing.T){
-	gov,err := GetHouseMembers()
+func TestGetHouseMembers(t *testing.T) {
+	gov, err := GetHouseMembers()
 	if err != nil {
-		t.Fatalf(" Error: %v\n",err)
+		t.Fatalf(" Error: %v\n", err)
 	}
 	fmt.Println(gov.Results[0].Members[0].State)
 }
-
 
 func TestHouse(t *testing.T) {
 	url := "https://api.propublica.org/congress/v1/116/senate/members.json"
@@ -49,4 +47,3 @@ func TestHouse(t *testing.T) {
 	fmt.Println(gov.Results[0].Members[0].FacebookAccount)
 
 }
-

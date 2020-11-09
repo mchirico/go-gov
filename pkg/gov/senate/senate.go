@@ -65,7 +65,6 @@ type Senate struct {
 	} `json:"results"`
 }
 
-
 func GetSenate() (Senate, error) {
 
 	url := "https://api.propublica.org/congress/v1/116/senate/members.json"

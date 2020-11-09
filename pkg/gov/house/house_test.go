@@ -48,11 +48,11 @@ func TestGetHouse(t *testing.T) {
 }
 
 func TestSubcommittees(t *testing.T) {
-   url := "https://api.propublica.org/congress/v1/members/A000374.json"
-   sub, err := GetSubcommittees(url)
-   if err != nil {
-   	t.Fatalf("Didn't work: %s\n",err)
-   }
-   fmt.Printf("sub: %v\n",sub)
+	url := "https://api.propublica.org/congress/v1/members/A000374.json"
+	sub, err := GetSubcommittees(url)
+	if err != nil {
+		t.Fatalf("Didn't work: %s\n", err)
+	}
+	fmt.Printf("sub: %v\n", sub)
 
 }

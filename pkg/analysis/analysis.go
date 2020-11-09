@@ -17,7 +17,7 @@ func GetHouseMembers() (house.House, error) {
 	h.Header(key, value)
 
 	r, err := h.Get(url)
-	if err != nil{
+	if err != nil {
 		return house.House{}, err
 	}
 

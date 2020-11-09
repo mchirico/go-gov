@@ -44,7 +44,6 @@ func TestGetSenate(t *testing.T) {
 		t.Fatalf("we got error")
 	}
 
-    fmt.Printf("gov: %v\n",gov)
-
+	fmt.Printf("gov: %v\n", gov)
 
 }

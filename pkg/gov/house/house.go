@@ -64,7 +64,6 @@ type House struct {
 	} `json:"results"`
 }
 
-
 type Subcommittees struct {
 	Status    string `json:"status"`
 	Copyright string `json:"copyright"`
@@ -153,9 +152,6 @@ type Subcommittees struct {
 	} `json:"results"`
 }
 
-
-
-
 func GetHouse() (House, error) {
 	url := "https://api.propublica.org/congress/v1/116/house/members.json"
 
@@ -177,7 +173,7 @@ func GetHouse() (House, error) {
 
 }
 
-func GetSubcommittees(url string) (Subcommittees,error){
+func GetSubcommittees(url string) (Subcommittees, error) {
 	key := "X-API-Key"
 	value := "1vtlJSvzaaB6bTjJKzyakYnjnxrRzM22Ex3j2SDR"
 
@@ -195,4 +191,3 @@ func GetSubcommittees(url string) (Subcommittees,error){
 	return sub, err
 
 }
-
